@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Ground
+  - Player
   - 
   - 
   - 
@@ -38,6 +38,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 3057813135
+    locked: 0
+  - name: World
+    uniqueID: 958122221
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Effects
+    uniqueID: 652026923
+    locked: 0
+  - name: Pickups
+    uniqueID: 1315354073
+    locked: 0
+  - name: Enemies
+    uniqueID: 1618815563
+    locked: 0
+  - name: Player
+    uniqueID: 367561279
     locked: 0
