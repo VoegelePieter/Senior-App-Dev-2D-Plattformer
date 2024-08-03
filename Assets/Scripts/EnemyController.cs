@@ -20,15 +20,6 @@ public class EnemyController : MonoBehaviour
     public float moveTime, waitTime;
     private float moveCount, waitCount;
 
-    public GameObject drop;
-    public float dropChance;
-
-    public static EnemyController instance;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     // Start is called before the first frame update
     void Start()
