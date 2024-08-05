@@ -11,7 +11,7 @@ public class UIController : MonoBehaviour
 
     public Image health1, health2, health3;
 
-    public Sprite healthFull, healthEmpty, healthHalf;
+    public Sprite healthFull, healthEmpty;
 
     public TextMeshProUGUI gemText;
 
@@ -46,7 +46,7 @@ public class UIController : MonoBehaviour
                 break;
 
             case 1:
-                health1.sprite = healthHalf;
+                health1.sprite = healthFull;
                 health2.sprite = healthEmpty;
                 health3.sprite = healthEmpty;
 
@@ -54,33 +54,12 @@ public class UIController : MonoBehaviour
 
             case 2:
                 health1.sprite = healthFull;
-                health2.sprite = healthEmpty;
+                health2.sprite = healthFull;
                 health3.sprite = healthEmpty;
 
                 break;
 
             case 3: 
-                health1.sprite = healthFull;
-                health2.sprite = healthHalf;
-                health3.sprite = healthEmpty;
-
-                break;
-
-            case 4:
-                health1.sprite = healthFull;
-                health2.sprite = healthFull;
-                health3.sprite = healthEmpty;
-
-                break;
-
-            case 5:
-                health1.sprite = healthFull;
-                health2.sprite = healthFull;
-                health3.sprite = healthHalf;
-
-                break;
-
-            case 6:
                 health1.sprite = healthFull;
                 health2.sprite = healthFull;
                 health3.sprite = healthFull;
