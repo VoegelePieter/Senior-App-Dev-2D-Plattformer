@@ -335,3 +335,5 @@ MonoBehaviour:
   drop: {fileID: 176556716736474202, guid: 042c8491911f23f4497b878b74a70f8f, type: 3}
   dropChance: 50
   deathEffect: {fileID: 9004454194156165528, guid: fe7a04d7ad5e8b04eb22e8c032e7b3f4, type: 3}
+  defaultBounceForce: 12
+  springBounceForce: 24

@@ -9,6 +9,9 @@ public class Stompbox : MonoBehaviour
 
     public GameObject deathEffect;
 
+    public float defaultBounceForce;
+    public float springBounceForce;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +31,14 @@ public class Stompbox : MonoBehaviour
             Debug.Log("hit");
             other.transform.parent.gameObject.SetActive(false);
 
-            PlayerController.instance.Bounce();
+            if(other.name == "Spring Sprite")
+            {
+                PlayerController.instance.Bounce(springBounceForce);
+            } 
+            else
+            {
+                PlayerController.instance.Bounce(defaultBounceForce);
+            }
 
             float dropSelect = Random.Range(0, 100f);
 
