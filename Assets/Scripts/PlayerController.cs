@@ -104,4 +104,19 @@ public class PlayerController : MonoBehaviour
         theRB.velocity = new Vector2(theRB.velocity.x, bounceForce);
     }
 
+        private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Platform")
+        {
+            transform.parent = other.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Platform")
+        {
+            transform.parent = null;
+        }
+    }
 }
