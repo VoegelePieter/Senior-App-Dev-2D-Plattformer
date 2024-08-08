@@ -99,9 +99,9 @@ public class PlayerController : MonoBehaviour
         theRB.velocity = new Vector2(0f, knockBackForce);
     }
 
-    public void Bounce()
+    public void Bounce(float bounceForce)
     {
-        theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+        theRB.velocity = new Vector2(theRB.velocity.x, bounceForce);
     }
 
 }
