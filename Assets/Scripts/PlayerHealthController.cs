@@ -17,6 +17,10 @@ public class PlayerHealthController : MonoBehaviour
 
     private SpriteRenderer theSR;
 
+    public float damageInterval;
+    public int damageAmount;
+    private float damageTimer;
+
     private void Awake()
     {
         instance = this;
@@ -28,6 +32,8 @@ public class PlayerHealthController : MonoBehaviour
         currentHealth = maxHealth;
 
         theSR = GetComponent<SpriteRenderer>();
+
+        damageTimer = damageInterval; // Initialize the timer with the interval
     }
 
     // Update is called once per frame
@@ -39,24 +45,33 @@ public class PlayerHealthController : MonoBehaviour
         {
             invincibleCounter -= Time.deltaTime;
 
-            if (invincibleCounter <= 0) 
+            if (invincibleCounter <= 0)
             {
-
                 //changing player opacity back to normal
-                theSR.color = theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f);
+                theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, 1f);
             }
-        } 
-    }
-
-    public void DealDamage() 
-    {
-
-        //damage player if not dead laready
-        if (invincibleCounter <= 0)
-        {
-            currentHealth--;
         }
 
+        // Automatic damage over time
+        if (damageTimer > 0)
+        {
+            damageTimer -= Time.deltaTime;
+
+            if (damageTimer <= 0)
+            {
+                DealDamage(damageAmount, false);
+                damageTimer = damageInterval; // Reset the timer after dealing damage
+            }
+        }
+    }
+
+    public void DealDamage(int damageAmount = 1, bool applyKnockbackAndInvincible = true)
+    {
+        //damage player if not dead already
+        if (invincibleCounter <= 0)
+        {
+            currentHealth -= damageAmount;
+        }
 
         //if player hp 0 = delete player
         if (currentHealth <= 0)
@@ -67,27 +82,26 @@ public class PlayerHealthController : MonoBehaviour
             LevelManager.instance.RespawnPlayer();
         }
 
-        //start invincibility timer and make player opacity .5 and knock him back if not currently on knockbacklength timer
-        if(invincibleCounter <= 0)
+        //start invincibility timer, make player opacity .5 and knock him back if requested
+        if (applyKnockbackAndInvincible && invincibleCounter <= 0)
         {
             invincibleCounter = invincibleLength;
             theSR.color = new Color(theSR.color.r, theSR.color.g, theSR.color.b, .5f);
             PlayerController.instance.KnockBack();
         }
-            
-
 
         UIController.instance.UpdateHealthDisplay();
     }
 
-    public void HealPlayer(int amound)
+    public void HealPlayer(int amount)
     {
-        if (currentHealth + amound >= maxHealth)
+        if (currentHealth + amount >= maxHealth)
         {
             currentHealth = maxHealth;
-        } else
+        }
+        else
         {
-            currentHealth += amound;
+            currentHealth += amount;
         }
         UIController.instance.UpdateHealthDisplay();
     }
