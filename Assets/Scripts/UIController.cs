@@ -13,6 +13,8 @@ public class UIController : MonoBehaviour
 
     public Sprite healthFull, healthEmpty;
 
+    public GameObject levelCompleteText;
+
     public TextMeshProUGUI gemText;
 
     private void Awake()

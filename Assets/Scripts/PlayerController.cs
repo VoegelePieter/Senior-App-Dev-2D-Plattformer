@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     public static PlayerController instance;
 
+    public bool stopInput;
+
     private void Awake()
     {
         instance = this;
@@ -40,51 +42,55 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (knockBackCounter <= 0)
-        {
-            isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, .2f, whatIsGround);
-
-
-            //walking
-            theRB.velocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), theRB.velocity.y);
-
-            if (isGrounded)
+        if (!stopInput) 
+        { 
+        
+            if (knockBackCounter <= 0)
             {
-                canDoubleJump = true;
-            }
+                isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, .2f, whatIsGround);
 
 
-            //Jump & Double Jump
-            if (Input.GetButtonDown("Jump") && isGrounded)
-            {
-                theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-            }
-            else if (Input.GetButtonDown("Jump") && canDoubleJump)
-            {
-                theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-                canDoubleJump = false;
-            }
+                //walking
+                theRB.velocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), theRB.velocity.y);
+
+                if (isGrounded)
+                {
+                    canDoubleJump = true;
+                }
 
 
-            //change direction facinng
-            if (theRB.velocity.x < 0f)
-            {
-                theSR.flipX = true;
-            }
-            else if (theRB.velocity.x > 0f)
-            {
-                theSR.flipX = false;
-            }
+                //Jump & Double Jump
+                if (Input.GetButtonDown("Jump") && isGrounded)
+                {
+                    theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+                }
+                else if (Input.GetButtonDown("Jump") && canDoubleJump)
+                {
+                    theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+                    canDoubleJump = false;
+                }
 
-        } else
-        {
-            knockBackCounter -= Time.deltaTime;
-            if(!theSR.flipX)
-            {
-                theRB.velocity = new Vector2(-knockBackForce, theRB.velocity.y);
+
+                //change direction facinng
+                if (theRB.velocity.x < 0f)
+                {
+                    theSR.flipX = true;
+                }
+                else if (theRB.velocity.x > 0f)
+                {
+                    theSR.flipX = false;
+                }
+
             } else
             {
-                theRB.velocity = new Vector2(knockBackForce, theRB.velocity.y);
+                knockBackCounter -= Time.deltaTime;
+                if(!theSR.flipX)
+                {
+                    theRB.velocity = new Vector2(-knockBackForce, theRB.velocity.y);
+                } else
+                {
+                    theRB.velocity = new Vector2(knockBackForce, theRB.velocity.y);
+                }
             }
         }
 
