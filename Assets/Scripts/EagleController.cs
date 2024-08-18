@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class EagleController : MonoBehaviour
 {
+    public GameObject drop;
+    [Range(0, 100)] public float dropChance;
+
+    public GameObject deathEffect;
+
+    public float bounceForce;
+
     public Transform[] points;
     public float moveSpeed;
 
@@ -81,8 +88,8 @@ public class EagleController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        LevelManager.instance.AddScore(killScore);
+        DestroyEnemy.instance.Destroy(theSR.gameObject, other, killScore, bounceForce, dropChance, drop, deathEffect);
     }
 }

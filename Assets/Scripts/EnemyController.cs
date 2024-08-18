@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public GameObject drop;
+    [Range(0, 100)] public float dropChance;
+
+    public GameObject deathEffect;
+
+    public float bounceForce;
 
     public float moveSpeed;
 
@@ -39,13 +45,13 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         if (moveCount > 0)
-        {         
+        {
 
             moveCount -= Time.deltaTime;
 
             if (movingDirection) //if direction right
             {
-                theRB.velocity = new Vector2 (moveSpeed, theRB.velocity.y);
+                theRB.velocity = new Vector2(moveSpeed, theRB.velocity.y);
                 anim.SetBool("isMoving", true);
 
                 if (transform.position.x > rightPoint.position.x)
@@ -54,7 +60,8 @@ public class EnemyController : MonoBehaviour
                     movingDirection = false;
                 }
 
-            } else // if direction left
+            }
+            else // if direction left
             {
                 theRB.velocity = new Vector2(-moveSpeed, theRB.velocity.y);
                 anim.SetBool("isMoving", true);
@@ -83,8 +90,8 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        LevelManager.instance.AddScore(killScore);
+        DestroyEnemy.instance.Destroy(theRB.gameObject, other, killScore, bounceForce, dropChance, drop, deathEffect);
     }
 }

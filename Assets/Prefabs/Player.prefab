@@ -174,6 +174,7 @@ MonoBehaviour:
     m_Bits: 256
   knockBackLength: 0.25
   knockBackForce: 5
+  stopInput: 0
 --- !u!114 &761935212045471237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +191,8 @@ MonoBehaviour:
   maxHealth: 6
   deathEffect: {fileID: 9004454194156165528, guid: fe7a04d7ad5e8b04eb22e8c032e7b3f4, type: 3}
   invincibleLength: 2
+  damageInterval: 0
+  damageAmount: 0
 --- !u!95 &7067007594411051656
 Animator:
   serializedVersion: 5
@@ -252,10 +255,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6397734384706988251}
   - component: {fileID: 3103746954037375822}
-  - component: {fileID: 2183707241925140680}
   m_Layer: 9
   m_Name: Stompbox
-  m_TagString: Untagged
+  m_TagString: Stompbox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -320,20 +322,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5596123, y: 0.25763178}
   m_EdgeRadius: 0
---- !u!114 &2183707241925140680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8547069032144536438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19b38a9847240bc4491affdc056730e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drop: {fileID: 176556716736474202, guid: 042c8491911f23f4497b878b74a70f8f, type: 3}
-  dropChance: 50
-  deathEffect: {fileID: 9004454194156165528, guid: fe7a04d7ad5e8b04eb22e8c032e7b3f4, type: 3}
-  defaultBounceForce: 12
-  springBounceForce: 24

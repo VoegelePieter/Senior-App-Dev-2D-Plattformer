@@ -99,6 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4637d83031451a46bf0304264d4173a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drop: {fileID: 176556716736474202, guid: 042c8491911f23f4497b878b74a70f8f, type: 3}
+  dropChance: 10.2
+  deathEffect: {fileID: 9004454194156165528, guid: fe7a04d7ad5e8b04eb22e8c032e7b3f4, type: 3}
+  bounceForce: 24
   moveSpeed: 5
   leftPoint: {fileID: 1856163606281527618}
   rightPoint: {fileID: 1934181941712702227}
