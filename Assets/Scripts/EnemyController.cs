@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour
     public float moveTime, waitTime;
     private float moveCount, waitCount;
 
+    public int killScore;
+
 
     // Start is called before the first frame update
     void Start()
@@ -79,5 +81,10 @@ public class EnemyController : MonoBehaviour
                 moveCount = Random.Range(moveTime * .5f, moveTime * 1.5f); ;
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.instance.AddScore(killScore);
     }
 }

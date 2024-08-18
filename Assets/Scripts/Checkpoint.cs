@@ -26,7 +26,10 @@ public class Checkpoint : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-
+            if(theSR.sprite != cpOn)
+            {
+                LevelManager.instance.AddScore(200);
+            }
             CheckpointsController.instance.DeactivateCheckpoints();
             theSR.sprite = cpOn;
             CheckpointsController.instance.SetSpawnPoint(transform.position);

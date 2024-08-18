@@ -18,6 +18,8 @@ public class EagleController : MonoBehaviour
     public float waitAfterAttack;
     private float attackCounter;
 
+    public int killScore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,5 +79,10 @@ public class EagleController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.instance.AddScore(killScore);
     }
 }

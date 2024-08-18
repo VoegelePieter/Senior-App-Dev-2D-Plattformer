@@ -105,6 +105,7 @@ MonoBehaviour:
   theSR: {fileID: 1834643043992888946}
   moveTime: 3
   waitTime: 2
+  killScore: 100
 --- !u!61 &139714741139640625
 BoxCollider2D:
   m_ObjectHideFlags: 0

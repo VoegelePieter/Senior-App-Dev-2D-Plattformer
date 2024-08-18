@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
 
     public int gemsCollected;
 
+    public int totalScore;
+
     public string levelToLoad;
 
     private void Awake()
@@ -70,4 +72,9 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(levelToLoad);
     }
 
+    public void AddScore(int addNum)
+    {
+        totalScore += addNum;
+        UIController.instance.UpdateScoreCount();
+    }
 }

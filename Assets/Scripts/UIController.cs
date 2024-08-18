@@ -17,6 +17,8 @@ public class UIController : MonoBehaviour
 
     public TextMeshProUGUI gemText;
 
+    public TextMeshProUGUI scoreText;
+
     private void Awake()
     {
         instance = this;
@@ -26,6 +28,7 @@ public class UIController : MonoBehaviour
     void Start()
     {
         UpdateGemCount();
+        UpdateScoreCount();
     }
 
     // Update is called once per frame
@@ -74,6 +77,11 @@ public class UIController : MonoBehaviour
     public void UpdateGemCount()
     {
         gemText.text = LevelManager.instance.gemsCollected.ToString();
+    }
+
+    public void UpdateScoreCount()
+    {
+        scoreText.text = LevelManager.instance.totalScore.ToString();
     }
 
 }
