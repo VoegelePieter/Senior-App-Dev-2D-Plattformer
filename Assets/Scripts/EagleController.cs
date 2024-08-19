@@ -17,6 +17,7 @@ public class EagleController : MonoBehaviour
     private int currentPoint;
 
     public SpriteRenderer theSR;
+    public Rigidbody2D theRB;
 
     public float distanceToAttackPlayer, chaseSpeed;
 
@@ -90,6 +91,6 @@ public class EagleController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        DestroyEnemy.instance.Destroy(theSR.gameObject, other, killScore, bounceForce, dropChance, drop, deathEffect);
+        DestroyEnemy.instance.Destroy(theRB.gameObject, other, killScore, bounceForce, dropChance, drop, deathEffect);
     }
 }

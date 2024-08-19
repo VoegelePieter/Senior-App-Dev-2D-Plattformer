@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6808761286472100881}
   - component: {fileID: 2012151466414925628}
+  - component: {fileID: 1849238249991195873}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -46,4 +47,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitToRespawn: 2
   gemsCollected: 0
+  totalScore: 0
   levelToLoad: Title
+--- !u!114 &1849238249991195873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7724800679297586750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2f46ffc3941476459778709f7457796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
