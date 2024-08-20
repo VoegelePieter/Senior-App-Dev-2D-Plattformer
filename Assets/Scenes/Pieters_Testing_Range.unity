@@ -28619,6 +28619,18 @@ PrefabInstance:
       propertyPath: levelToLoad
       value: Victory
       objectReference: {fileID: 0}
+    - target: {fileID: 2012151466414925628, guid: a47c5fe9be459a94ebfe93a24fa202bd, type: 3}
+      propertyPath: starScoreRequirements.Array.data[0]
+      value: 250
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012151466414925628, guid: a47c5fe9be459a94ebfe93a24fa202bd, type: 3}
+      propertyPath: starScoreRequirements.Array.data[1]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012151466414925628, guid: a47c5fe9be459a94ebfe93a24fa202bd, type: 3}
+      propertyPath: starScoreRequirements.Array.data[2]
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 6808761286472100881, guid: a47c5fe9be459a94ebfe93a24fa202bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 532.4734

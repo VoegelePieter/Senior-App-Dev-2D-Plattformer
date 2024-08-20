@@ -17,9 +17,18 @@ public class LevelManager : MonoBehaviour
 
     public string levelToLoad;
 
+    public int[] starScoreRequirements = new int[3];
+
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update
@@ -76,5 +85,14 @@ public class LevelManager : MonoBehaviour
     {
         totalScore += addNum;
         UIController.instance.UpdateScoreCount();
+    }
+
+    public int GetStarRating()
+    {
+        // Unfortunately, the Switch statement for this would look equally bad
+        if (totalScore >= starScoreRequirements[2]) return 3;
+        if (totalScore >= starScoreRequirements[1]) return 2;
+        if (totalScore >= starScoreRequirements[0]) return 1;
+        return 0;
     }
 }
