@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private AudioSource playerAudio;
 
     public float moveSpeed;
     public float jumpForce; 
@@ -13,10 +14,12 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     public Transform groundCheckPoint;
     public LayerMask whatIsGround;
+    public AudioClip jumpSound;
+    public AudioClip deathSound;
 
     private bool canDoubleJump;
 
-    private Animator anim;
+    public Animator anim;
     private SpriteRenderer theSR;
 
 
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         theSR = GetComponent<SpriteRenderer>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -58,17 +62,8 @@ public class PlayerController : MonoBehaviour
                     canDoubleJump = true;
                 }
 
-
-                //Jump & Double Jump
-                if (Input.GetButtonDown("Jump") && isGrounded)
-                {
-                    theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-                }
-                else if (Input.GetButtonDown("Jump") && canDoubleJump)
-                {
-                    theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-                    canDoubleJump = false;
-                }
+                // Jumping
+                if (Input.GetButtonDown("Jump")) jump();
 
 
                 //change direction facinng
@@ -79,6 +74,11 @@ public class PlayerController : MonoBehaviour
                 else if (theRB.velocity.x > 0f)
                 {
                     theSR.flipX = false;
+                }
+
+                if (theRB.transform.position.y <= -10)
+                {
+                    LevelManager.instance.RespawnPlayer();
                 }
 
             } else
@@ -98,6 +98,27 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat("moveSpeed", Mathf.Abs(theRB.velocity.x));
     }
 
+    private void jump()
+    {
+        if (isGrounded)
+        {
+            PlayerSoundPitched(jumpSound);
+            theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+        }
+        else if (canDoubleJump)
+        {
+            PlayerSoundPitched(jumpSound, 1.5f);
+            theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+            canDoubleJump = false;
+        }
+    }
+
+    public void PlayerSoundPitched(AudioClip clip, float pitch = 1.0f)
+    {
+        playerAudio.pitch = pitch;
+        playerAudio.PlayOneShot(clip);
+    }
+
     public void KnockBack()
     {
         knockBackCounter = knockBackLength;
@@ -110,7 +131,7 @@ public class PlayerController : MonoBehaviour
         theRB.velocity = new Vector2(theRB.velocity.x, bounceForce);
     }
 
-        private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag == "Platform")
         {

@@ -5,12 +5,12 @@ using UnityEngine.UIElements;
 
 public class PlayerHealthController : MonoBehaviour
 {
-
     public static PlayerHealthController instance;
 
     public int currentHealth, maxHealth;
 
     public GameObject deathEffect;
+    public int deathScorePenalty;
 
     public float invincibleLength;
     private float invincibleCounter;
@@ -20,6 +20,7 @@ public class PlayerHealthController : MonoBehaviour
     public float damageInterval;
     public int damageAmount;
     private float damageTimer;
+    public AudioClip damageSound;
 
     private void Awake()
     {
@@ -71,6 +72,17 @@ public class PlayerHealthController : MonoBehaviour
         if (invincibleCounter <= 0)
         {
             currentHealth -= damageAmount;
+            switch (currentHealth)
+            {
+                case 0:
+                    break;
+                case 1:
+                    PlayerController.instance.PlayerSoundPitched(damageSound, 2f);
+                    break;
+                default:
+                    PlayerController.instance.PlayerSoundPitched(damageSound);
+                    break;
+            }
         }
 
         //if player hp 0 = delete player
@@ -78,6 +90,7 @@ public class PlayerHealthController : MonoBehaviour
         {
             currentHealth = 0;
 
+            LevelManager.instance.SubtractScore(deathScorePenalty);
             Instantiate(deathEffect, PlayerController.instance.transform.position, PlayerController.instance.transform.rotation);
             LevelManager.instance.RespawnPlayer();
         }
