@@ -110,6 +110,8 @@ MonoBehaviour:
   moveTime: 5
   waitTime: 1
   killScore: 100
+  killSound: {fileID: 8300000, guid: dc40711d94f1bcf42988f2befb22119b, type: 3}
+  killSoundPitch: 1.5
 --- !u!61 &139714741139640625
 BoxCollider2D:
   m_ObjectHideFlags: 0

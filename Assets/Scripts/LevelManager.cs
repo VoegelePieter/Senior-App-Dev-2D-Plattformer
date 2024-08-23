@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
         UIController.instance.levelCompleteText.SetActive(true);
 
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(4.5f);
 
         SceneManager.LoadScene(levelToLoad);
     }

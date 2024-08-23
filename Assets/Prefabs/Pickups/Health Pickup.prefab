@@ -100,8 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGem: 0
   isHeal: 1
-  healAmound: 1
+  gemScore: 0
+  healAmount: 1
   pickupEffect: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: 00eaa619228f92c4f8cf7f71aff094da, type: 3}
 --- !u!70 &4500129838022004247
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

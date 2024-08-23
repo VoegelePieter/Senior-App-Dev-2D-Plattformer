@@ -9,46 +9,45 @@ public class Pickup : MonoBehaviour
     public bool isGem;
     public bool isHeal;
 
-    public int healAmound;
-
-    private bool isCollected;
+    public int gemScore;
+    public int healAmount;
 
     public GameObject pickupEffect;
 
+    public AudioClip pickupSound;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player" && !isCollected)
+        if(other.tag == "Player")
         {
-            if (isGem)
-            {
-                LevelManager.instance.AddScore(25);
-                LevelManager.instance.gemsCollected++;
-                isCollected = true;
-                UIController.instance.UpdateGemCount();
 
-                Instantiate(pickupEffect, transform.position, transform.rotation);
-                Destroy(gameObject);
-            }
-            if (isHeal && PlayerHealthController.instance.currentHealth != PlayerHealthController.instance.maxHealth)
-            {
-                PlayerHealthController.instance.HealPlayer(healAmound);
-                Destroy(gameObject);
-            }
+            bool collected = false;
+
+            if (isGem) collected = CollectGem();
+            else if (isHeal && PlayerHealthController.instance.currentHealth != PlayerHealthController.instance.maxHealth) collected = CollectMilk();
+
+            if (collected) PlayerController.instance.PlayerSoundPitched(pickupSound);
         }
+    }
 
+    private bool CollectGem()
+    {
+        LevelManager.instance.AddScore(gemScore);
+        LevelManager.instance.gemsCollected++;
+        UIController.instance.UpdateGemCount();
 
+        Instantiate(pickupEffect, transform.position, transform.rotation);
+        Destroy(gameObject);
+
+        return true;
+    }
+
+    private bool CollectMilk()
+    {
+        PlayerHealthController.instance.HealPlayer(healAmount);
+        Destroy(gameObject);
+
+        return true;
     }
 }

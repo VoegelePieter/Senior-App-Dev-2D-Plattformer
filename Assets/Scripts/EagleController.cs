@@ -27,6 +27,7 @@ public class EagleController : MonoBehaviour
     private float attackCounter;
 
     public int killScore;
+    public AudioClip killSound;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +92,6 @@ public class EagleController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        DestroyEnemy.instance.Destroy(theRB.gameObject, other, killScore, bounceForce, dropChance, drop, deathEffect);
+        DestroyEnemy.instance.Destroy(theRB.gameObject, other, killScore, killSound, bounceForce, dropChance, drop, deathEffect);
     }
 }

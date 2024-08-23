@@ -166,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4223c46147f7554aa6c212a8ab7dcbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAudio: {fileID: 8581092542386083691}
   moveSpeed: 8
   jumpForce: 12
   theRB: {fileID: 9200509695500039318}
@@ -192,15 +191,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37506f48e3df87a40ada1752b9353620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAudio: {fileID: 8581092542386083691}
   currentHealth: 0
-  maxHealth: 6
+  maxHealth: 3
   deathEffect: {fileID: 9004454194156165528, guid: fe7a04d7ad5e8b04eb22e8c032e7b3f4, type: 3}
   deathScorePenalty: 200
   invincibleLength: 2
   damageInterval: 0
   damageAmount: 0
   damageSound: {fileID: 8300000, guid: a39f2fa37f465714990e379c544d66ba, type: 3}
+  healSound: {fileID: 8300000, guid: 00eaa619228f92c4f8cf7f71aff094da, type: 3}
 --- !u!95 &7067007594411051656
 Animator:
   serializedVersion: 5

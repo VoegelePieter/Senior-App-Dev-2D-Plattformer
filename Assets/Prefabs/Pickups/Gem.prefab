@@ -101,8 +101,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGem: 1
   isHeal: 0
-  healAmound: 0
+  gemScore: 25
+  healAmount: 0
   pickupEffect: {fileID: 8722494293647874838, guid: 7ff4b629ad222204689d910401b68125, type: 3}
+  pickupSound: {fileID: 8300000, guid: cc90dc27dc00d9d488db4c35489dcd18, type: 3}
 --- !u!95 &2711232321995702723
 Animator:
   serializedVersion: 5
