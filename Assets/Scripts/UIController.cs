@@ -19,6 +19,13 @@ public class UIController : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
 
+    public Button walkLeftButton;
+    public Button walkRightButton;
+    public Button jumpButton;
+
+    private bool walkingRight;
+    private bool walkingLeft;
+
     private void Awake()
     {
         instance = this;
@@ -31,10 +38,31 @@ public class UIController : MonoBehaviour
         UpdateScoreCount();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (walkingLeft) PlayerController.instance.WalkLeft();
+        if (walkingRight) PlayerController.instance.WalkRight();
+    }
+
+    public void InputStartWalkLeft()
+    {
+        walkingLeft = true;
+    }
+    public void InputStopWalkLeft()
+    {
+        walkingLeft = false;
+    }
+    public void InputStartWalkRight()
+    {
+        walkingRight = true;
+    }
+    public void InputStopWalkRight()
+    {
+        walkingRight = false;
+    }
+    public void InputJump()
+    {
+        PlayerController.instance.Jump();
     }
 
     public void UpdateHealthDisplay()
