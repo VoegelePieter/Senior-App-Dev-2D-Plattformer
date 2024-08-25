@@ -12,15 +12,26 @@ public class CameraController : MonoBehaviour
 
     private Vector2 lastPos;
 
+    private AudioSource levelMusic;
+    public AudioClip victoryFanfare;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelMusic = GetComponent<AudioSource>();
         lastPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (UIController.instance.levelCompleteText.activeInHierarchy == true && levelMusic.loop)
+        {
+            levelMusic.loop = false;
+            levelMusic.clip = victoryFanfare;
+            levelMusic.Play();
+        }
+
         transform.position = new Vector3(target.position.x, Mathf.Clamp(target.position.y, minHeight, maxHeight), transform.position.z);
 
         Vector2 amountToMove = new Vector2(transform.position.x - lastPos.x, transform.position.y - lastPos.y);

@@ -4,19 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private AudioSource playerAudio;
 
     public float moveSpeed;
-    public float jumpForce; 
+    public float jumpForce;
     public Rigidbody2D theRB;
 
 
     private bool isGrounded;
     public Transform groundCheckPoint;
     public LayerMask whatIsGround;
+    public AudioClip jumpSound;
+    public AudioClip deathSound;
 
     private bool canDoubleJump;
 
-    private Animator anim;
+    public Animator anim;
     private SpriteRenderer theSR;
 
 
@@ -37,39 +40,31 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         theSR = GetComponent<SpriteRenderer>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!stopInput) 
-        { 
-        
+        if (!stopInput)
+        {
+
             if (knockBackCounter <= 0)
             {
                 isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, .2f, whatIsGround);
 
-
-                //walking
+#if UNITY_EDITOR
+                // This overrides the mobile input, disabling the left and right buttons - don't worry about this,
+                // it's just for testing purposes while running in the editor
                 theRB.velocity = new Vector2(moveSpeed * Input.GetAxisRaw("Horizontal"), theRB.velocity.y);
+
+                if (Input.GetButtonDown("Jump")) Jump();
+#endif
 
                 if (isGrounded)
                 {
                     canDoubleJump = true;
                 }
-
-
-                //Jump & Double Jump
-                if (Input.GetButtonDown("Jump") && isGrounded)
-                {
-                    theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-                }
-                else if (Input.GetButtonDown("Jump") && canDoubleJump)
-                {
-                    theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
-                    canDoubleJump = false;
-                }
-
 
                 //change direction facinng
                 if (theRB.velocity.x < 0f)
@@ -81,13 +76,20 @@ public class PlayerController : MonoBehaviour
                     theSR.flipX = false;
                 }
 
-            } else
+                if (theRB.transform.position.y <= -10)
+                {
+                    LevelManager.instance.RespawnPlayer();
+                }
+
+            }
+            else
             {
                 knockBackCounter -= Time.deltaTime;
-                if(!theSR.flipX)
+                if (!theSR.flipX)
                 {
                     theRB.velocity = new Vector2(-knockBackForce, theRB.velocity.y);
-                } else
+                }
+                else
                 {
                     theRB.velocity = new Vector2(knockBackForce, theRB.velocity.y);
                 }
@@ -96,6 +98,39 @@ public class PlayerController : MonoBehaviour
 
         anim.SetBool("isGrounded", isGrounded);
         anim.SetFloat("moveSpeed", Mathf.Abs(theRB.velocity.x));
+    }
+
+    public void WalkRight()
+    {
+        if (!stopInput) theRB.velocity = new Vector2(moveSpeed, theRB.velocity.y);
+    }
+    public void WalkLeft()
+    {
+        if (!stopInput) theRB.velocity = new Vector2(-moveSpeed, theRB.velocity.y);
+    }
+
+    public void Jump()
+    {
+        if (!stopInput)
+        {
+            if (isGrounded)
+            {
+                PlayerSoundPitched(jumpSound);
+                theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+            }
+            else if (canDoubleJump)
+            {
+                PlayerSoundPitched(jumpSound, 1.5f);
+                theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+                canDoubleJump = false;
+            }
+        }
+    }
+
+    public void PlayerSoundPitched(AudioClip clip, float pitch = 1.0f)
+    {
+        playerAudio.pitch = pitch;
+        playerAudio.PlayOneShot(clip);
     }
 
     public void KnockBack()
@@ -110,9 +145,9 @@ public class PlayerController : MonoBehaviour
         theRB.velocity = new Vector2(theRB.velocity.x, bounceForce);
     }
 
-        private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Platform")
+        if (other.gameObject.tag == "Platform")
         {
             transform.parent = other.transform;
         }

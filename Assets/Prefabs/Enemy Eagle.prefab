@@ -181,6 +181,7 @@ MonoBehaviour:
   chaseSpeed: 10
   waitAfterAttack: 2
   killScore: 150
+  killSound: {fileID: 8300000, guid: dc40711d94f1bcf42988f2befb22119b, type: 3}
 --- !u!114 &1378796678100042843
 MonoBehaviour:
   m_ObjectHideFlags: 0

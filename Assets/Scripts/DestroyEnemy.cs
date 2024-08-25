@@ -11,7 +11,7 @@ public class DestroyEnemy : MonoBehaviour
         instance = this;
     }
 
-    public void Destroy(GameObject enemy, Collider2D otherEntity, int killScore, float bounceForce, float dropChance, GameObject drop, GameObject effect)
+    public void Destroy(GameObject enemy, Collider2D otherEntity, int killScore, AudioClip killSound, float bounceForce, float dropChance, GameObject drop, GameObject effect, float killSoundPitch = 1.0f)
     {
         if (otherEntity.tag == "Stompbox")
         {
@@ -19,6 +19,7 @@ public class DestroyEnemy : MonoBehaviour
             LevelManager.instance.AddScore(killScore);
 
             PlayerController.instance.Bounce(bounceForce);
+            PlayerController.instance.PlayerSoundPitched(killSound, killSoundPitch);
 
             float dropSelect = Random.Range(0, 100f);
 

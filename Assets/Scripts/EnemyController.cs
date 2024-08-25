@@ -27,6 +27,8 @@ public class EnemyController : MonoBehaviour
     private float moveCount, waitCount;
 
     public int killScore;
+    public AudioClip killSound;
+    public float killSoundPitch = 1.0f;
 
 
     // Start is called before the first frame update
@@ -92,6 +94,6 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        DestroyEnemy.instance.Destroy(theRB.gameObject, other, killScore, bounceForce, dropChance, drop, deathEffect);
+        DestroyEnemy.instance.Destroy(theRB.gameObject, other, killScore, killSound, bounceForce, dropChance, drop, deathEffect, killSoundPitch);
     }
 }

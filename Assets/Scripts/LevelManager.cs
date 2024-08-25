@@ -31,21 +31,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (PlayerController.instance.transform.position.y <= -10)
-        {
-            RespawnPlayer();
-        }
-    }
-
     public void RespawnPlayer()
     {
         StartCoroutine(RespawnCo());
@@ -53,11 +38,17 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator RespawnCo()
     {
-        PlayerController.instance.gameObject.SetActive(false);
+        PlayerController.instance.PlayerSoundPitched(PlayerController.instance.deathSound);
+        PlayerController.instance.anim.SetBool("dead", true);
+        PlayerController.instance.theRB.simulated = false;
+        PlayerController.instance.stopInput = true;
 
         yield return new WaitForSeconds(waitToRespawn);
 
-        PlayerController.instance.gameObject.SetActive(true);
+        PlayerController.instance.anim.SetBool("dead", false);
+        PlayerController.instance.theRB.simulated = true;
+        PlayerController.instance.stopInput = false;
+
         PlayerController.instance.theRB.velocity = new Vector2(0f, 0f);
         PlayerController.instance.transform.position = CheckpointsController.instance.spawnPoint;
 
@@ -76,7 +67,7 @@ public class LevelManager : MonoBehaviour
         UIController.instance.levelCompleteText.SetActive(true);
 
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(4.5f);
 
         SceneManager.LoadScene(levelToLoad);
     }
@@ -84,6 +75,12 @@ public class LevelManager : MonoBehaviour
     public void AddScore(int addNum)
     {
         totalScore += addNum;
+        UIController.instance.UpdateScoreCount();
+    }
+
+    public void SubtractScore(int subNum)
+    {
+        totalScore -= subNum;
         UIController.instance.UpdateScoreCount();
     }
 
