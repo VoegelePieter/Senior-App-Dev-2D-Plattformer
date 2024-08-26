@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ChildCollectible : MonoBehaviour
 {
+    public AudioClip collectSound;
+
     void Start()
     {
         // Disable the child collectible at the start of the game
@@ -16,6 +18,7 @@ public class ChildCollectible : MonoBehaviour
             SpecialCollectible parentScript = GetComponentInParent<SpecialCollectible>();
             if (parentScript != null)
             {
+                PlayerController.instance.PlayerSoundPitched(collectSound, Random.Range(1.3f, 1.65f));
                 parentScript.CollectChild();
             }
 
