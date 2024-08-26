@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
                 if (theRB.transform.position.y <= -10)
                 {
+                    LevelManager.instance.SubtractScore(PlayerHealthController.instance.deathScorePenalty);
                     LevelManager.instance.RespawnPlayer();
                 }
 
