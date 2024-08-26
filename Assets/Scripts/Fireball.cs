@@ -9,10 +9,14 @@ public class Fireball : MonoBehaviour
     private SpriteRenderer sr;
     private Vector2 startPosition;
 
+    public AudioClip castSound;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        Boss.instance.BossSoundPitched(castSound);
 
         startPosition = rb.position;
 

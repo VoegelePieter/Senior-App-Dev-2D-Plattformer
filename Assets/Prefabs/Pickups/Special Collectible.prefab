@@ -488,3 +488,5 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 54274518483995564, guid: 2da82b22637e69d44b7c31aa08e4d15b, type: 3}
   m_PrefabInstance: {fileID: 5842274828805570974}
   m_PrefabAsset: {fileID: 0}
+  collectSound: {fileID: 8300000, guid: cc90dc27dc00d9d488db4c35489dcd18, type: 3}
+  collectedAllChildrenScoreReward: 1000

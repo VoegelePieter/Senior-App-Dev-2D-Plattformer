@@ -13,6 +13,9 @@ public class Boss : MonoBehaviour
     public float jumpInterval = 5f;
     public float jumpHeight = 5f;
     public float jumpSpeed = 2f;
+    public AudioClip jumpSound;
+    private AudioSource bossAudio;
+    public float bossAudioDistance = 10f;
 
     private bool movingRight = false;
     private bool isJumping = false;
@@ -26,9 +29,17 @@ public class Boss : MonoBehaviour
 
     private Vector2 originalPosition; // The original position before jumping
 
+    public static Boss instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         theRB = GetComponent<Rigidbody2D>();
+        bossAudio = GetComponent<AudioSource>();
 
         // Detach the points from the boss, so they stay fixed in place
         leftPoint.parent = null;
@@ -101,6 +112,7 @@ public class Boss : MonoBehaviour
 
     private void StartJump()
     {
+        BossSoundPitched(jumpSound, 0.2f);
         isJumping = true;
         isMovingUp = true;
         originalPosition = transform.position; 
@@ -132,6 +144,19 @@ public class Boss : MonoBehaviour
                 // Resume horizontal movement after landing
                 theRB.velocity = movingRight ? new Vector2(moveSpeed, 0) : new Vector2(-moveSpeed, 0);
             }
+        }
+    }
+    public void BossSoundPitched(AudioClip clip, float pitch = 1.0f)
+    {
+        if (theRB.position.x - PlayerController.instance.theRB.position.x < bossAudioDistance)
+        {
+            bossAudio.mute = false;
+            bossAudio.pitch = pitch;
+            bossAudio.PlayOneShot(clip);
+        }
+        else
+        {
+            bossAudio.mute = true;
         }
     }
 
