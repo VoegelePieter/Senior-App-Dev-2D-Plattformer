@@ -11,6 +11,8 @@ public class Lever : MonoBehaviour
     private SpriteRenderer spriteRenderer; 
     private bool isActivated = false;
 
+    public AudioClip leverSwitch;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -26,8 +28,6 @@ public class Lever : MonoBehaviour
                 // Stop the boss's behavior and make it fall
                 boss.GetComponent<Boss>().StopAllBehavior();
             }
-
-            isActivated = false;
         }
     }
 
@@ -35,6 +35,8 @@ public class Lever : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isActivated)
         {
+            PlayerController.instance.PlayerSoundPitched(leverSwitch);
+
             isActivated = true;
             ChangeSprite();
         }

@@ -147,3 +147,4 @@ MonoBehaviour:
   bossWall: {fileID: 0}
   bossGround: {fileID: 0}
   boss: {fileID: 0}
+  leverSwitch: {fileID: 8300000, guid: ee289ae1d683aeb47809616bd545321f, type: 3}

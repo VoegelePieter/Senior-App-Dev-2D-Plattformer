@@ -175,3 +175,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTravelDistance: 15
+  castSound: {fileID: 8300000, guid: b82fcf2db2812204c85407eec15f8328, type: 3}
