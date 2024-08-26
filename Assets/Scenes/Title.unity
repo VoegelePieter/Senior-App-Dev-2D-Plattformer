@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2fd92ff335e5214ba2a822431cac889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene: Pieters_Testing_Range
+  startScene: Level
   highscoresText: {fileID: 1393976137}
 --- !u!1 &471115567
 GameObject:

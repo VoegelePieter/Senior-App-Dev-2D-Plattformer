@@ -5,9 +5,17 @@ using UnityEngine;
 public class WaterDropletSpawner : MonoBehaviour
 {
     public GameObject waterDropletPrefab; // Reference to the water droplet prefab
-    public float spawnInterval = 1f; // Time interval between spawns in seconds
+    public float minSpawnInterval = 0.5f; // Minimum time interval between spawns in seconds
+    public float maxSpawnInterval = 2f; // Maximum time interval between spawns in seconds
 
     private float timeSinceLastSpawn;
+    private float currentSpawnInterval;
+
+    void Start()
+    {
+        // Initialize the current spawn interval to a random value within the range
+        currentSpawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+    }
 
     void Update()
     {
@@ -15,10 +23,13 @@ public class WaterDropletSpawner : MonoBehaviour
         timeSinceLastSpawn += Time.deltaTime;
 
         // Check if it's time to spawn a new droplet
-        if (timeSinceLastSpawn >= spawnInterval)
+        if (timeSinceLastSpawn >= currentSpawnInterval)
         {
             SpawnWaterDroplet();
             timeSinceLastSpawn = 0f; // Reset the timer
+
+            // Randomize the next spawn interval
+            currentSpawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
         }
     }
 
