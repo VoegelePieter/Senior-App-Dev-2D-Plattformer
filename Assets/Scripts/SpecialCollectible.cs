@@ -5,13 +5,17 @@ public class SpecialCollectible : MonoBehaviour
     private int totalChildCollectibles;
     private int collectedChildCount = 0;
     private SpriteRenderer spriteRenderer;
-    private Collider2D collider2D;
+    private Collider2D collectibleCollider2D;
+
+    public AudioClip collectSound;
+
+    public int collectedAllChildrenScoreReward;
 
     void Start()
     {
         // Get references to the main collectible's components
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collider2D = GetComponent<Collider2D>();
+        collectibleCollider2D = GetComponent<Collider2D>();
 
         // Count the number of child collectibles
         totalChildCollectibles = transform.childCount;
@@ -33,13 +37,16 @@ public class SpecialCollectible : MonoBehaviour
 
     private void CollectMain()
     {
+        PlayerController.instance.PlayerSoundPitched(collectSound, 1.7f);
+
         // Disable the main collectible's visual and interaction
         spriteRenderer.enabled = false;
-        collider2D.enabled = false;
+        collectibleCollider2D.enabled = false;
 
         // Enable all child collectibles
         foreach (Transform child in transform)
         {
+            Debug.LogWarning(child);
             child.gameObject.SetActive(true);
         }
     }
@@ -50,12 +57,12 @@ public class SpecialCollectible : MonoBehaviour
 
         if (collectedChildCount >= totalChildCollectibles)
         {
-            AllChildrenCollecte();
+            AllChildrenCollected();
         }
     }
 
-    private void AllChildrenCollecte()
+    private void AllChildrenCollected()
     {
-        Debug.Log("All child collectibles collected! Execute special action.");
+        LevelManager.instance.AddScore(collectedAllChildrenScoreReward);
     }
 }
