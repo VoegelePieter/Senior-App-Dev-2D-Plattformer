@@ -46,6 +46,7 @@ public class SpecialCollectible : MonoBehaviour
         // Enable all child collectibles
         foreach (Transform child in transform)
         {
+            Debug.LogWarning(child);
             child.gameObject.SetActive(true);
         }
     }
