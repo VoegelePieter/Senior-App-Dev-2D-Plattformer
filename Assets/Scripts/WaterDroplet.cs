@@ -20,6 +20,11 @@ public class WaterDroplet : MonoBehaviour
         {
             PlayerHealthController.instance.DealDamage();
             Destroy(gameObject);
+            
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
         }
     }
 
