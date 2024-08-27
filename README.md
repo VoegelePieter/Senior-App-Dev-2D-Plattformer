@@ -12,27 +12,25 @@ The highscore board shows the players' top 10 scores, together with the dates wh
 # Level Scene
 ## Prefabs
 ### Level Manager
-X
+Manages Star Requirements, Respawning and Score + Gems
 ### Main Camera
-X
+Follows specific Target (Player) and manages the Background Movement
 ### Player
-X
+Literal Milkman who needs to bring his milk to the flag pole. Damaging the player results in loosing milk (HP). Milk bottle Collectibles restore lost milk. 
 ### Player UI
-X
+Shows milk count, collected gem amound and current Score. contains also 3 buttons to control the player.
 ### Enemies
 All enemies, except for the boss, reward the player with a configurable amount of score points.
 #### Frog
-X
+Jumps around between two pre defined points and damages the player on contact. Can be killed if you jump on his head
 #### Eagle
-X
+Flyes around between a distinct amound of points, if the player is in his attack distance, he will fly to the player and attack him. 
 #### Spring
 The spring enemy is designed not directly as an enemy, but also as a tool, as it can be used to reach high places. It has a higher "Player Bounce" value, which causes the player to bounce a lot higher than normal when jumping on them. They share the same behavior controller as the frog, but are configured differently.
 #### Boss
-X
-##### Fireball
-X
+Super Mario NES inspired Bowser bossfight, where he shoots fireballs and you have to slip through under him to reach the lever to win the fight and unlock the finish.
 ##### Lever
-X
+If player collides with it, destroys the ground underneath the boss and the wall that is blocking the finish.
 ### Collectibles
 #### Gems
 Gems only serve the purpose of increasing the overall score. The amount of score each gem gives can be modified easily and individually, but has been left at 25 for all in this case.
@@ -43,7 +41,7 @@ A single strawberry needs to be a collected, and then its hierarchical children 
 ### Checkpoint
 X. The default score reward for activating a checkpoint is 200.
 ### Checkpoint Controller
-X
+Manages Respawning.
 ### Environmental Hazards
 #### Spikes
 A simple floor-mounted spike trap that deals one point of contact damage to the player.
@@ -52,10 +50,10 @@ Placing a Water Leak prefab causes water droplets to repeatedly spawn and fall d
 #### Pits & Plattforms
 By simply making pits in the terrain that are hard to cross, the player may fall down into the "kill-zone". To accompany the pits, we've also created plattforms, some of which can move. Those platforms can obviously also be used to create alternate paths or change the overall movement options, not just over pits.
 ### Background
-X
+Far Background which moves exactly like the camera and a middle background which moves in a parallax like way
 
 ## Level Design
-X
+
 
 # Victory Scene
 ## Score
